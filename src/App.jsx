@@ -14,7 +14,9 @@ function App() {
       <header className={styles.header}>
         <div>
           <h1>TO DO:</h1>
-          <h2>5 task(s)</h2>
+          <h2>
+            {todos.length} task{`${todos.length > 1 ? "s" : ""}`}
+          </h2>
         </div>
         <button className={styles.button}>+</button>
       </header>
