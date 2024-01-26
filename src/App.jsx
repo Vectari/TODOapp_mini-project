@@ -1,6 +1,7 @@
 import styles from "./App.module.css";
 import { Form } from "./components/Form/Form";
 import { TodoItem } from "./components/TodoItem/TodoItem";
+import { getSubheading } from "./utils/getSubheading";
 
 function App() {
   const todos = [
@@ -14,9 +15,7 @@ function App() {
       <header className={styles.header}>
         <div>
           <h1>TO DO:</h1>
-          <h2>
-            {todos.length} task{`${todos.length > 1 ? "s" : ""}`}
-          </h2>
+          <h2>{getSubheading(todos.length)}</h2>
         </div>
         <button className={styles.button}>+</button>
       </header>
