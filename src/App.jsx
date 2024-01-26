@@ -34,7 +34,7 @@ function App() {
           onFormSubmit={(newTodoName) => {
             setTodos((prevTodos) => [
               ...prevTodos,
-              { name: newTodoName, done: false, id: prevTodos.length + 1 },
+              { name: newTodoName, done: false, id: prevTodos.at(-1).id + 1 }, // add new id based on last element of array
             ]);
             setIsFormShown(false);
           }}
