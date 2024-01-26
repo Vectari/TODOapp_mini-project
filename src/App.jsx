@@ -13,6 +13,33 @@ function App() {
     { name: "Go to park", done: true, id: 3 },
   ]);
 
+  function addItem(newTodoName) {
+    setTodos((prevTodos) => [
+      ...prevTodos,
+      { name: newTodoName, done: false, id: Math.random() }, // add new id based on last element of array
+    ]);
+    setIsFormShown(false);
+  }
+
+  function deleteItem(id) {
+    setTodos((prevTodos) => prevTodos.filter((todo) => todo.id !== id));
+  }
+
+  function finishItem(id) {
+    setTodos((prevTodos) =>
+      prevTodos.map((todo) => {
+        if (todo.id !== id) {
+          return todo;
+        }
+
+        return {
+          ...todo,
+          done: true,
+        };
+      })
+    );
+  }
+
   return (
     <div className={styles.container}>
       <header className={styles.header}>
@@ -30,15 +57,7 @@ function App() {
         )}
       </header>
       {isFormShown && (
-        <Form
-          onFormSubmit={(newTodoName) => {
-            setTodos((prevTodos) => [
-              ...prevTodos,
-              { name: newTodoName, done: false, id: prevTodos.at(-1).id + 1 }, // add new id based on last element of array
-            ]);
-            setIsFormShown(false);
-          }}
-        />
+        <Form onFormSubmit={(newTodoName) => addItem(newTodoName)} />
       )}
       <ul>
         {todos.map(({ id, name, done }) => (
@@ -46,25 +65,8 @@ function App() {
             key={id}
             name={name}
             done={done}
-            onDeleteButtonClick={() => {
-              setTodos((prevTodos) =>
-                prevTodos.filter((todo) => todo.id !== id)
-              );
-            }}
-            onDoneButtonClick={() => {
-              setTodos((prevTodos) =>
-                prevTodos.map((todo) => {
-                  if (todo.id !== id) {
-                    return todo;
-                  }
-
-                  return {
-                    ...todo,
-                    done: true,
-                  };
-                })
-              );
-            }}
+            onDeleteButtonClick={() => deleteItem(id)}
+            onDoneButtonClick={() => finishItem(id)}
           />
         ))}
       </ul>
