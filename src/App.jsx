@@ -44,7 +44,7 @@ function App() {
     <div className={styles.container}>
       <header className={styles.header}>
         <div>
-          <h1>TO DO:</h1>
+          <h1>TO DO LIST:</h1>
           <h2>{getSubheading(todos.length)}</h2>
         </div>
         {!isFormShown && (
